@@ -1,0 +1,15 @@
+import { Request, Response } from "express";
+declare class ProductController {
+    private productService;
+    constructor();
+    findAll: (req: Request, res: Response) => Promise<void>;
+    add: (req: Request, res: Response) => Promise<void>;
+    update: (req: Request, res: Response) => Promise<void>;
+    delete: (req: Request, res: Response) => Promise<void>;
+    find: (req: Request, res: Response) => Promise<void>;
+    increase: (req: Request, res: Response) => Promise<void>;
+    decrease: (req: Request, res: Response) => Promise<void>;
+    findById: (req: Request, res: Response) => Promise<void>;
+}
+declare const _default: ProductController;
+export default _default;

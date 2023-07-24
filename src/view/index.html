@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.4.0/axios.min.js"></script>
+</head>
+<body>
+    <div id="display"></div>
+    <div>
+        add 
+        <input type="text"  id="name">
+        <input type="text"  id="price">
+        <input type="text"  id="image">
+        <input type="text"  id="category">
+        <button onclick="save()">save</button>
+    </div>
+<hr>
+    <div>edit
+        <input type="hidden"id="idEdit">
+        <input type="text"  id="nameEdit">
+        <input type="text"  id="priceEdit">
+        <input type="text"  id="imageEdit">
+        <input type="text"  id="categoryEdit">
+        <button onclick="update()">update</button>
+    </div>
+    <script>
+        load()
+
+        function save() {
+            let data = {
+                name : document.getElementById('name').value,
+                price : document.getElementById('price').value,
+                image : document.getElementById('image').value,
+                category : document.getElementById('category').value,
+            }
+            axios.post('http://localhost:3000/products', data).then(res=>{
+                load()
+            })
+        }
+
+        function deleteProduct(id) {
+            axios.delete(`http://localhost:3000/products/${id}`).then((res)=>{
+                console.log('xóa sản phẩm thành công');
+                axios.get(url).then((res)=>{
+            load()
+                })
+            })
+        }
+        
+        function showFormEdit(id) {
+            axios.get('http://localhost:3000/products'+'/'+id).then((res)=>{
+                console.log(res.data[0])
+                let data = res.data[0]
+                document.getElementById('idEdit').value = data.id
+                document.getElementById('nameEdit').value = data.name
+                document.getElementById('priceEdit').value = data.price
+                document.getElementById('imageEdit').value = data.image
+                document.getElementById('categoryEdit').value = data.category
+            })
+
+        }
+        
+        function update() {
+            let data = {
+                id : document.getElementById('idEdit').value,
+                name : document.getElementById('nameEdit').value,
+                price : document.getElementById('priceEdit').value,
+                image : document.getElementById('imageEdit').value,
+                category : document.getElementById('categoryEdit').value,
+            }
+            axios.put('http://localhost:3000/products'+'/' + data.id, data).then(res=>{
+                axios.get('http://localhost:3000/products').then((res) => {
+                    load()
+                })
+                
+            })
+        }
+
+        function load() {
+        axios.get('http://localhost:3000/products').then((res)=>{
+            let str ='';
+            let data = res.data 
+            data.map(item => {
+                str += `<h1>${item.name}, ${item.price}</h1> 
+                <button onclick="deleteProduct(${item.id})">delete</button> 
+                <button onclick="showFormEdit(${item.id})">edit</button>`
+            })
+            document.getElementById('display').innerHTML = str
+        })
+        }
+    </script>
+</body>
+</html>
