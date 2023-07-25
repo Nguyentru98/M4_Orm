@@ -8,6 +8,7 @@
 </head>
 <body>
     <div id="display"></div>
+    <hr>
     <div>
         add 
         <input type="text"  id="name">
@@ -24,6 +25,11 @@
         <input type="text"  id="imageEdit">
         <input type="text"  id="categoryEdit">
         <button onclick="update()">update</button>
+    </div>
+    <hr>
+    <div>
+        <input type="text" id="search">
+        <button onclick="search()">search</button>
     </div>
     <script>
         load()
@@ -43,8 +49,8 @@
         function deleteProduct(id) {
             axios.delete(`http://localhost:3000/products/${id}`).then((res)=>{
                 console.log('xóa sản phẩm thành công');
-                axios.get(url).then((res)=>{
-            load()
+                axios.get(`http://localhost:3000/products`).then((res)=>{
+                    load()
                 })
             })
         }
@@ -72,11 +78,26 @@
             }
             axios.put('http://localhost:3000/products'+'/' + data.id, data).then(res=>{
                 axios.get('http://localhost:3000/products').then((res) => {
-                    load()
+                   
                 })
                 
             })
         }
+
+    function search() {
+        let productId = document.getElementById('search').value;
+            axios.get(`http://localhost:3000/products/${productId}`).then(response => {
+                let str =''
+                let data = response.data
+                console.log(data);
+                    data.map(item => {
+                        str += `<h1>${item.name}, ${item.price}</h1> 
+                        <button onclick="deleteProduct(${item.id})">delete</button> 
+                        <button onclick="showFormEdit(${item.id})">edit</button>`
+                    })
+                    document.getElementById('display').innerHTML = str
+                })
+    }
 
         function load() {
         axios.get('http://localhost:3000/products').then((res)=>{
