@@ -39,10 +39,11 @@ class ProductService {
     decrease = async () => {
         return await this.productRepository.find({order: {price: 'DESC'}})
     }
-    findById = async (id) => {
+    findByName = async (name) => {
+        console.log(name);
         return await this.productRepository.find({
             where: {
-               id  
+               name: name  
             },
         })
     }

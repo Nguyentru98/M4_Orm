@@ -9,5 +9,5 @@ productRouter.delete('/:id', productController.delete);
 productRouter.get('/find', productController.find);
 productRouter.get('/asc', productController.increase);
 productRouter.get('/desc', productController.decrease);
-productRouter.get('/:id', productController.findById);
+productRouter.get('/findByName', productController.findByName);
 export default productRouter;

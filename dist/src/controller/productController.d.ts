@@ -9,7 +9,7 @@ declare class ProductController {
     find: (req: Request, res: Response) => Promise<void>;
     increase: (req: Request, res: Response) => Promise<void>;
     decrease: (req: Request, res: Response) => Promise<void>;
-    findById: (req: Request, res: Response) => Promise<void>;
+    findByName: (req: Request, res: Response) => Promise<void>;
 }
 declare const _default: ProductController;
 export default _default;

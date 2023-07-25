@@ -37,8 +37,8 @@ class ProductController {
         let data = await this.productService.decrease();
         res.json(data);
     }
-    findById = async (req: Request, res: Response) => {
-        let data = await this.productService.findById(req.params.id);
+    findByName = async (req: Request, res: Response) => {
+        let data = await this.productService.findByName(req.query.name);
         res.json(data);
     }
 }

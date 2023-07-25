@@ -34,10 +34,11 @@ class ProductService {
         this.decrease = async () => {
             return await this.productRepository.find({ order: { price: 'DESC' } });
         };
-        this.findById = async (id) => {
+        this.findByName = async (name) => {
+            console.log(name);
             return await this.productRepository.find({
                 where: {
-                    id
+                    name: name
                 },
             });
         };

@@ -8,7 +8,7 @@ declare class ProductService {
     find: (text: any) => Promise<any>;
     increase: () => Promise<any>;
     decrease: () => Promise<any>;
-    findById: (id: any) => Promise<any>;
+    findByName: (name: any) => Promise<any>;
 }
 declare const _default: ProductService;
 export default _default;

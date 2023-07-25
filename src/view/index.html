@@ -85,8 +85,8 @@
         }
 
     function search() {
-        let productId = document.getElementById('search').value;
-            axios.get(`http://localhost:3000/products/${productId}`).then(response => {
+        let productName = document.getElementById('search').value;
+            axios.get(`http://localhost:3000/products/findByName?name=${productName}`).then(response => {
                 let str =''
                 let data = response.data
                 console.log(data);

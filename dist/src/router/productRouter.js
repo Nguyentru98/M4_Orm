@@ -13,6 +13,6 @@ productRouter.delete('/:id', productController_1.default.delete);
 productRouter.get('/find', productController_1.default.find);
 productRouter.get('/asc', productController_1.default.increase);
 productRouter.get('/desc', productController_1.default.decrease);
-productRouter.get('/:id', productController_1.default.findById);
+productRouter.get('/findByName', productController_1.default.findByName);
 exports.default = productRouter;
 //# sourceMappingURL=productRouter.js.map
